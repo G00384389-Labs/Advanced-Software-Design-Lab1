@@ -1,7 +1,7 @@
 package ie.gmit.sw;
 
 public class CaesarCypher {
-	public int key;
+	private int key;
 
 	public String encrypt(String plainText) throws CypherException{
 		return new String(encrypt(plainText.getBytes()));
@@ -9,7 +9,7 @@ public class CaesarCypher {
 	
 	public byte[] encrypt(byte[] plainText) throws CypherException{
 		for(int i =0; i < plainText.length; i++) {
-			plainText[i] +=key;
+			plainText[i] +=getKey();
 		}
 		
 		return plainText;
@@ -22,10 +22,18 @@ public class CaesarCypher {
 	
 	public byte[] decrypt(byte[] cypherText) throws CypherException{
 		for(int i = 0; i<= cypherText.length; i++) {
-			cypherText[i] -= key;
+			cypherText[i] -= getKey();
 		}
 		
 		return cypherText;
+	}
+
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -34,6 +42,31 @@ public class CaesarCypher {
 		// TODO Auto-generated method stub
 		super.finalize();
 	}
+	
+	public interface CypherKey{
+		public void setKey(String key) throws CypherException;
+		public String getKey();
+	}
+	
+	public class CypherKeyImpl implements CypherKey {
+		private int key;
+		
+		
+		
+		@Override
+		public void setKey(String key) throws CypherException {
+//			CaesarCypher.this.key = 7;
+			this.key = Integer.parseInt(key);
+			
+		}
+
+		@Override
+		public String getKey() {
+			return "" + key;
+		}
+		
+	}
+		
 	
 	
 		
