@@ -1,38 +1,47 @@
 package ie.gmit.sw;
 
-public class CaesarCypher {
-	private int key;
+public class CaesarCypher implements Cypherable {
+	private CypherKey key;
 
-	public String encrypt(String plainText) throws CypherException{
+	@Override
+	public String encrypt(String plainText) throws CypherException {
 		return new String(encrypt(plainText.getBytes()));
-	}	
-	
-	public byte[] encrypt(byte[] plainText) throws CypherException{
-		for(int i =0; i < plainText.length; i++) {
-			plainText[i] +=getKey();
-		}
-		
-		return plainText;
 	}
-	
-	public String decrypt(String cypherText) throws CypherException{
+
+	@Override
+	public byte[] encrypt(byte[] plainText) throws CypherException {
+		return doCypher(plainText, true);
+	}
+
+	@Override
+	public String decrypt(String cypherText) throws CypherException {
 		return new String(decrypt(cypherText.getBytes()));
 	}
-	
-	
-	public byte[] decrypt(byte[] cypherText) throws CypherException{
-		for(int i = 0; i<= cypherText.length; i++) {
-			cypherText[i] -= getKey();
-		}
-		
+
+	@Override
+	public byte[] decrypt(byte[] cypherText) throws CypherException {
+		return doCypher(cypherText, false);
+
 		return cypherText;
 	}
 
-	public int getKey() {
+	private byte[] doCypher(byte[] bytes, boolean encrypt) throws CypherExceptipn {
+		for(int = 0; i < bytes.length; i++) {
+			if(encrypt) {
+				bytes[i] += Integer.parseInt(key.getKey());
+			}else {
+				bytes[i] -= Integer.parseInt(key.getKey());
+			}
+			
+		}
+	 return bytes;
+	}
+
+	public CypherKey getKey() {
 		return key;
 	}
 
-	public void setKey(int key) {
+	public void setKey(CypherKey key) {
 		this.key = key;
 	}
 
@@ -42,32 +51,22 @@ public class CaesarCypher {
 		// TODO Auto-generated method stub
 		super.finalize();
 	}
-	
-	public interface CypherKey{
-		public void setKey(String key) throws CypherException;
-		public String getKey();
-	}
-	
-	public class CypherKeyImpl implements CypherKey {
+
+	public class CaesarCypherKeyImpl implements CypherKey {
 		private int key;
-		
-		
-		
+
 		@Override
 		public void setKey(String key) throws CypherException {
 //			CaesarCypher.this.key = 7;
 			this.key = Integer.parseInt(key);
-			
+
 		}
 
 		@Override
 		public String getKey() {
 			return "" + key;
 		}
-		
+
 	}
-		
-	
-	
-		
+
 }
