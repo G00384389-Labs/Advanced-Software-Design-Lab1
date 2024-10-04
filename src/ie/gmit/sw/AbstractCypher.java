@@ -1,7 +1,7 @@
 package ie.gmit.sw;
 
 public abstract class AbstractCypher implements Cypherable {
-	protected CypherKey key;
+	private CypherKey key;
 
 	public AbstractCypher() {
 		super();
@@ -18,11 +18,11 @@ public abstract class AbstractCypher implements Cypherable {
 		return doCypher(cypherText, false);
 	}
 
-	public CypherKey getKey() {
+	public CypherKey getCypherKey() {
 		return key;
 	}
 
-	public void setKey(CypherKey key, CaesarCypher caesarCypher) {
+	public void setCypherKey(CypherKey key) {
 		this.key = key;
 	}
 
