@@ -1,6 +1,8 @@
 package ie.gmit.sw;
 
 public interface Cypherable {	
+	public abstract CypherKey getCypherKey();
+	public abstract void setCypherKey(CypherKey key);
 
 	public abstract byte[] encrypt(byte[] plainText) throws CypherException;
 	public abstract byte[] decrypt(byte[] cypherText) throws CypherException;

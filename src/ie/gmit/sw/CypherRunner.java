@@ -3,7 +3,9 @@ package ie.gmit.sw;
 public class CypherRunner {
 	
 	public static void main(String[] args) throws CypherException {
-		AbstractCypher cc = new VernamCypher();
+		Cypherable cc = new VernamCypher();
+//		Cypherable cc = new CaesarCypher();		 Caesar Cypher	
+//		CypherKey ck = new StringCypherKey("4"); Caesar Cypher		
 		CypherKey ck = new StringCypherKey("EFIUIUGWGEFIUWgefiwqufiqwufifweifugwefiguwefi");		
 		cc.setCypherKey(ck);
 		
