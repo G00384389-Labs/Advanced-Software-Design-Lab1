@@ -5,7 +5,8 @@ public class CypherRunner {
 	public static void main(String[] args) throws CypherException {
 		CaesarCypher cc = new CaesarCypher();
 		CypherKey ck = cc.new CaesarCypherKeyImpl();
-		cc.setKey(ck);
+		ck.setKey("7");
+		cc.setKey(ck, cc);
 		
 		String s = "Happy Days!";
 		String t = cc.encrypt(s);
